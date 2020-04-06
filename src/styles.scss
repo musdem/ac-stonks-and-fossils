@@ -3,7 +3,7 @@
 
 body {
   color: $ac-brown;
-  background-color: $ac-light-brown;
+  background-color: $ac-light-green;
   font-family: sans-serif;
 }
 
@@ -17,11 +17,15 @@ ul {
 .btn-main {
   padding: 16px 26px;
   background-color: $ac-brown;
-  color: $ac-white;
+  color: $ac-light-brown;
   border: 1px $ac-brown solid;
   margin: 6px 10px;
+  &:hover {
+    color: $ac-brown;
+    background-color: $ac-light-brown;
+  }
 }
 
-.btn-main-slim {
+.btn-slim {
   padding: 4px 16px;
 }

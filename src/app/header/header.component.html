@@ -1,0 +1,14 @@
+<header>
+  <div class="logo"></div>
+  <div class="login-status-wrapper">
+    <div *ngIf="!loggedIn;else username" class="login-button-wrapper">
+      <button class="btn btn-main btn-slim">Login</button>
+    </div>
+    <ng-template #username>
+      <div class="username-wrapper">Hello, {{ user.name }}.</div>
+      <div class="logout-button-wrapper">
+        <button class="btn btn-main btn-slim">Logout</button>
+      </div>
+    </ng-template>
+  </div>
+</header>

@@ -7,6 +7,7 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { ServicesComponent } from './services/services.component';
 import { StonkDashboardComponent } from './dashboards/stonk-dashboard/stonk-dashboard.component';
 import { FossilsDashboardComponent } from './dashboards/fossils-dashboard/fossils-dashboard.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FossilsDashboardComponent } from './dashboards/fossils-dashboard/fossil
     ModalComponent,
     ServicesComponent,
     StonkDashboardComponent,
-    FossilsDashboardComponent
+    FossilsDashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

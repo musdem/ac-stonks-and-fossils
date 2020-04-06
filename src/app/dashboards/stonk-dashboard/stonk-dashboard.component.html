@@ -3,7 +3,7 @@
   <button class="btn btn-main" (click)="showBoughtSubmit()">Submit Turnips Bought</button>
 </div>
 <div class="user-stonks">
-  <p>Hi {{ user.name }}, your current turnips are {{ user.turnipsBought }}. You bought these at {{ user.priceBought }}b/T.</p>
+  <p>Hi {{ user.name }}, the current number of turnips you own is {{ user.turnipsBought }}. You bought these at {{ user.priceBought }} b/T.</p>
 </div>
 <div class="current-stonks">
   <ul>
@@ -26,6 +26,6 @@
     <label for="turnip-input">{{ priceSubmission ? 'Please enter the price of your turnips: ' : 'Please enter the number of turnips you bought' }}</label>
     <br>
     <input id="turnip-input" type="text"/>
-    <button class="btn btn-main btn-main-slim" (click)="toggleModal()">Submit</button>
+    <button class="btn btn-main btn-slim" (click)="toggleModal()">Submit</button>
   </div>
 </ac-modal>
