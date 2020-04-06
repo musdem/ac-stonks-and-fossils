@@ -1,0 +1,14 @@
+.ac-modal-wrapper {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.3);
+  .ac-modal {
+    min-width: 300px;
+    min-height: 200px;
+    border: 2px solid white;
+  }
+}

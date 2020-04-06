@@ -1,1 +1,23 @@
-<p>stonk-dashboard works!</p>
+<div class="stonks-controls">
+  <button class="btn btn-main">Submit Turnip Price</button>
+  <button class="btn btn-main">Submit Turnips Bought</button>
+</div>
+<div class="user-stonks">
+  <p>Hi {{ user.name }}, your current turnips are {{ user.turnipsBought }}. You bought these at {{ user.priceBought }}b/T.</p>
+</div>
+<div class="current-stonks">
+  <ul>
+    <li class="column-titles stonks-row">
+      <div class="name">Name</div>
+      <div class="turnip-price">Current Turnip Price</div>
+      <div class="turnip-profit">Possible Profit</div>
+      <div class="turnip-total">Total Return</div>
+    </li>
+    <li *ngFor="let investor of investors" class="column-data stonks-row">
+      <div class="name">{{ investor.name }}</div>
+      <div class="turnip-price">{{ investor.price }}b/T</div>
+      <div class="turnip-profit">{{ user.turnipsBought * (investor.price - user.priceBought) }} bells</div>
+      <div class="turnip-total">{{ user.turnipsBought * investor.price}} bells</div>
+    </li>
+  </ul>
+</div>

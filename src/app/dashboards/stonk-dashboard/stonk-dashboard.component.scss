@@ -1,0 +1,21 @@
+.column-titles {
+  background-color: #f1e26f;
+}
+.column-data {
+  background-color: #f8f8f0;
+}
+.stonks-row {
+  display: flex;
+  .name {
+    flex: 1;
+  }
+  .turnip-price {
+    flex: 1;
+  }
+  .turnip-profit {
+    flex: 1;
+  }
+  .turnip-total {
+    flex: 1;
+  }
+}
