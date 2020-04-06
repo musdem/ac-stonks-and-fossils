@@ -14,6 +14,8 @@ export class StonkDashboardComponent implements OnInit {
     turnipsBought: 1960
   };
   investors = [];
+  showModal = false;
+  priceSubmission: boolean;
 
   constructor() { }
 
@@ -37,6 +39,20 @@ export class StonkDashboardComponent implements OnInit {
         price: 80
       }
     ];
+  }
+
+  showPriceSubmit() {
+    this.priceSubmission = true;
+    this.toggleModal();
+  }
+
+  showBoughtSubmit() {
+    this.priceSubmission = false;
+    this.toggleModal();
+  }
+
+  toggleModal() {
+    this.showModal = !this.showModal;
   }
 
 }

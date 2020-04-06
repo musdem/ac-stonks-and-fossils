@@ -1,42 +1,27 @@
 @import '~bootstrap/dist/css/bootstrap.css';
-
-$backgroundColor: #e9f4ec;
-$textColor: #6b5c43;
-$inverseTextColor: #fff;
-
-p {
-  color: $textColor;
-  font-size: 14px;
-  line-height: 1.5;
-}
-h1 {
-  color: $textColor;
-}
-h2 {
-  color: $textColor;
-}
-h3 {
-  color: $textColor;
-}
-h4 {
-  color: $textColor;
-}
-h5 {
-  color: $textColor;
-}
-h6 {
-  color: $textColor;
-}
+@import './assets/variables';
 
 body {
-  background-color: $backgroundColor;
+  color: $ac-brown;
+  background-color: $ac-light-brown;
   font-family: sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 //buttons
 .btn-main {
-  padding: 20px 25px;
-  background-color: $textColor;
-  color: $inverseTextColor;
-  border: 1px $textColor solid;
+  padding: 16px 26px;
+  background-color: $ac-brown;
+  color: $ac-white;
+  border: 1px $ac-brown solid;
+  margin: 6px 10px;
+}
+
+.btn-main-slim {
+  padding: 4px 16px;
 }

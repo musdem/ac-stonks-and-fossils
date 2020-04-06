@@ -1,8 +1,55 @@
+@import '../../../assets/variables';
+
 .column-titles {
   background-color: #f1e26f;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  div {
+    padding: 20px;
+    border: 1px $ac-brown;
+    border-style: none solid none none;
+    &:first-child {
+      border-left: none;
+    }
+
+    &:nth-child(3) {
+      border-right: none;
+    }
+    @media only screen and (min-width: 768px) {
+      &:nth-child(3) {
+        border-right: 1px solid;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
 }
 .column-data {
   background-color: #f8f8f0;
+  div {
+    padding: 20px;
+    border: 1px $ac-brown;
+    border-style: solid solid none none;
+    &:first-child {
+      border-left: none;
+    }
+    &:nth-child(3) {
+      border-right: none;
+    }
+    @media only screen and (min-width: 768px) {
+      &:nth-child(3) {
+        border-right: 1px solid;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  &:last-child {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
 }
 .stonks-row {
   display: flex;
