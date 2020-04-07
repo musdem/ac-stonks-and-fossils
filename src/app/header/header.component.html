@@ -3,6 +3,7 @@
   <div class="login-status-wrapper">
     <div *ngIf="!loggedIn;else username" class="login-button-wrapper">
       <button class="btn btn-main btn-slim">Login</button>
+      <button class="btn btn-main btn-slim">Create Account</button>
     </div>
     <ng-template #username>
       <div class="username-wrapper">Hello, {{ user.name }}.</div>

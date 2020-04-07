@@ -1,1 +1,14 @@
-<p>fossils-dashboard works!</p>
+<div class="fossil-controls">
+  <button class="btn btn-main" (click)="showSellFossils()">Sell Fossils</button>
+  <button class="btn btn-main" (click)="showBuyFossils()">Buy Fossils</button>
+</div>
+<div class="user-fossils">
+  <h1>Coming soon!</h1>
+</div>
+
+<ac-modal *ngIf="showModal">
+  <div class="fossil-request-submission">
+    <p>I said coming soon, chill the fuck out.</p>
+    <button class="btn btn-main btn-slim" (click)="toggleModal()">hoot hoot.</button>
+  </div>
+</ac-modal>

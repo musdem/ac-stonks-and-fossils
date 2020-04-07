@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import fossilList from '../../../assets/fossils';
 
 @Component({
   selector: 'ac-fossils-dashboard',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FossilsDashboardComponent implements OnInit {
 
+  showModal = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showSellFossils() {
+    this.toggleModal();
+  }
+
+  showBuyFossils() {
+    this.toggleModal();
+  }
+
+  toggleModal() {
+    this.showModal = !this.showModal;
   }
 
 }
