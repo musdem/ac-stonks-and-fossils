@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleCreateAccount(account: CreateResponse) {
-    alert(`successfully created account for ${account.user}`)
+    alert(`successfully created account for ${account.user}`);
     this.toggleModal();
   }
 
