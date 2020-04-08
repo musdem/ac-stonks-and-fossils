@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../shared/models/user.model';
+import { Stonk } from '../../shared/models/stonks.model';
 
 @Component({
   selector: 'ac-stonk-dashboard',
@@ -7,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StonkDashboardComponent implements OnInit {
 
-  user = {
-    name: 'Zack',
-    price: 140,
-    priceBought: 91,
-    turnipsBought: 1960
-  };
+  user = new User(
+    'Zack',
+    91,
+    1960
+  );
   investors = [];
   showModal = false;
   priceSubmission: boolean;
@@ -22,22 +23,22 @@ export class StonkDashboardComponent implements OnInit {
   ngOnInit(): void {
     // TODO pull in investor data from API
     this.investors = [
-      {
-        name: 'Annie',
-        price: 150
-      },
-      {
-        name: 'Connor',
-        price: 160
-      },
-      {
-        name: 'Ohan',
-        price: 170
-      },
-      {
-        name: 'Matthew',
-        price: 80
-      }
+      new Stonk(
+        'Annie',
+        150
+      ),
+      new Stonk(
+        'Connor',
+        160
+      ),
+      new Stonk(
+        'Ohan',
+        170
+      ),
+      new Stonk(
+        'Matthew',
+        80
+      )
     ];
   }
 

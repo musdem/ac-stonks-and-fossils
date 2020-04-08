@@ -2,14 +2,44 @@
   <div class="logo"></div>
   <div class="login-status-wrapper">
     <div *ngIf="!loggedIn;else username" class="login-button-wrapper">
-      <button class="btn btn-main btn-slim">Login</button>
-      <button class="btn btn-main btn-slim">Create Account</button>
+      <button class="btn btn-main btn-slim" (click)="startLogin()">Login</button>
+      <button class="btn btn-main btn-slim" (click)="startCreateAccount()">Create Account</button>
     </div>
     <ng-template #username>
-      <div class="username-wrapper">Hello, {{ user.name }}.</div>
+      <div class="username-wrapper">Hello, {{ account.name }}.</div>
       <div class="logout-button-wrapper">
-        <button class="btn btn-main btn-slim">Logout</button>
+        <button class="btn btn-main btn-slim" (click)="logout()">Logout</button>
       </div>
     </ng-template>
   </div>
 </header>
+<ac-modal *ngIf="showModal">
+  <div *ngIf="loggingIn;else create">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username"/>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password"/>
+      <br>
+      <button class="btn btn-main btn-slim" type="submit" [disabled]="!loginForm.valid">Login</button>
+      <button class="btn btn-main btn-slim" (click)="toggleModal()">Cancel</button>
+    </form>
+  </div>
+  <ng-template #create>
+    <div>
+      <form [formGroup]="createForm" (ngSubmit)="createAccount()">
+        <label for="usernameCreate">Username:</label>
+        <input type="text" id="usernameCreate" formControlName="username"/>
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name"/>
+        <br>
+        <label for="passwordCreate">Password:</label>
+        <input type="password" id="passwordCreate" formControlName="password"/>
+        <br>
+        <button class="btn btn-main btn-slim" type="submit" [disabled]="!createForm.valid">Create Account</button>
+      </form>
+    </div>
+  </ng-template>
+</ac-modal>

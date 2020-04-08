@@ -1,6 +1,7 @@
-@import '../../../assets/variables';
+@import 'src/assets/variables';
 
 .ac-modal-wrapper {
+  z-index: 20;
   height: 100%;
   width: 100%;
   position: fixed;

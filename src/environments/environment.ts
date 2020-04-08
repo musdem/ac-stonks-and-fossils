@@ -6,6 +6,17 @@ export const environment = {
   production: false
 };
 
+export const api = {
+  base: 'http://localhost:3000',
+  login: '/login',
+  createAccount: '/create',
+  verify: '/verify',
+  getPubKey: '/get-pub-key',
+  stonks: '/stonks',
+  sellStonks: '?sell=true',
+  buyStonks: '?buy=true'
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

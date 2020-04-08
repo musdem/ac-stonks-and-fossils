@@ -3,24 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalComponent } from './shared/modal/modal.component';
-import { ServicesComponent } from './services/services.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 import { StonkDashboardComponent } from './dashboards/stonk-dashboard/stonk-dashboard.component';
 import { FossilsDashboardComponent } from './dashboards/fossils-dashboard/fossils-dashboard.component';
 import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './menu/menu.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalComponent,
-    ServicesComponent,
     StonkDashboardComponent,
     FossilsDashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
