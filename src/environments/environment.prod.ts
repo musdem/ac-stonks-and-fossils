@@ -3,7 +3,7 @@ export const environment = {
 };
 
 export const api = {
-  base: 'http://saf.zmuni.ch/api',
+  base: 'https://saf.zmuni.ch/api',
   login: '/login',
   createAccount: '/create',
   verify: '/verify',
