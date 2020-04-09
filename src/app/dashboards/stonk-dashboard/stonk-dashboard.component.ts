@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from '../../shared/models/user.model';
-import {BuyStonks, SellStonks, Stonk} from '../../shared/models/stonks.model';
+import {BuyStonks, SellStonks, Stonk, StonkSuccess} from '../../shared/models/stonks.model';
 import { LoginService } from '../../shared/services/login-service/login.service';
 import { StonksService } from '../../shared/services/stonks-service/stonks.service';
 import {ToastService} from '../../shared/services/toast-service/toast.service';
@@ -36,18 +36,18 @@ export class StonkDashboardComponent implements OnInit {
     private toastService: ToastService,
     private cd: ChangeDetectorRef
   ) {
-    this.loginService.updateLoginStatus().subscribe(
+    loginService.updateLoginStatus().subscribe(
       status => this.handleLogin(status)
+    );
+    stonkService.getStonks().subscribe(
+      stonks => this.investors = stonks,
+      error => this.showToast(error.error.status, false)
     );
   }
 
   ngOnInit(): void {
     this.user = this.loginService.getUser();
     this.loggedIn = !!this.user;
-    this.stonkService.getStonks().subscribe(
-      stonks => this.investors = stonks,
-      error => this.showToast(error.error.status, false)
-    );
     console.log(this.user);
   }
 
@@ -77,18 +77,34 @@ export class StonkDashboardComponent implements OnInit {
       const price = this.stonkSellForm.value.stonkPrice;
       const stonk = new SellStonks(this.loginService.getJwt(), this.loginService.getPubKey(), this.user.name, price);
       this.stonkService.sellStonks(stonk).subscribe(
-        status => this.showToast(`Updated Stonk price for ${status.user}`, true),
+        status => this.handleSellStonks(status, price),
         error => this.showToast(error.error.status, false)
       );
     } else {
       const {stonksBought, stonkPrice} = this.stonkBuyForm.value;
       const stonks = new BuyStonks(this.loginService.getJwt(), this.loginService.getPubKey(), stonksBought, stonkPrice);
       this.stonkService.buyStonks(stonks).subscribe(
-        status => this.showToast(`Updated Stonks bought for ${status.user}`, true),
+        status => this.handleBuyStonks(status, stonksBought, stonkPrice),
         error => this.showToast(error.error.status, false)
       );
     }
     this.toggleModal();
+  }
+
+  handleSellStonks(status: StonkSuccess, price: number) {
+    this.showToast(`Updated Stonk price for ${status.user}`, true);
+    for (const investor of this.investors) {
+      if (investor.name === status.user) {
+        investor.price = price;
+      }
+    }
+  }
+
+  handleBuyStonks(status: StonkSuccess, stonksBought: number, stonkPrice: number) {
+    this.showToast(`Updated Stonks bought for ${status.user}`, true);
+    this.user.turnipsBought = stonksBought;
+    this.user.priceBought = stonkPrice;
+    this.loginService.setUser(this.user);
   }
 
   toggleModal() {
