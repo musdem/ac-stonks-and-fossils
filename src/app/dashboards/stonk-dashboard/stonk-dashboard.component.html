@@ -1,31 +1,49 @@
 <div class="stonks-controls">
-  <button class="btn btn-main" (click)="showPriceSubmit()">Submit Turnip Price</button>
-  <button class="btn btn-main" (click)="showBoughtSubmit()">Submit Turnips Bought</button>
+  <button class="btn btn-main" (click)="showPriceSubmit()">Submit Stonk Price</button>
+  <button class="btn btn-main" (click)="showBoughtSubmit()">Submit Stonks Bought</button>
 </div>
-<div class="user-stonks">
-  <p>Hi {{ user.name }}, the current number of turnips you own is {{ user.turnipsBought }}. You bought these at {{ user.priceBought }} b/T.</p>
+<div *ngIf="loggedIn && user" class="user-stonks">
+  <p *ngIf="user.turnipsBought && user.priceBought;else newUser">Hi {{ user.name }}, the current number of turnips you own is {{ user.turnipsBought }}. You bought these at {{ user.priceBought }} b/T.</p>
+  <ng-template #newUser>
+    <p>Hi {{ user.name }}, please enter the price you bought and the number of turnips you bought at to get started.</p>
+  </ng-template>
 </div>
 <div class="current-stonks">
   <ul>
     <li class="column-titles stonks-row">
       <div class="name">Name</div>
-      <div class="turnip-price">Current Turnip Price</div>
+      <div class="turnip-price">Current Stonk Price</div>
       <div class="turnip-profit">Possible Profit</div>
       <div class="turnip-total d-none d-md-block">Total Return</div>
     </li>
     <li *ngFor="let investor of investors" class="column-data stonks-row">
       <div class="name">{{ investor.name }}</div>
       <div class="turnip-price">{{ investor.price }} b/T</div>
-      <div class="turnip-profit">{{ user.turnipsBought * (investor.price - user.priceBought) }} bells</div>
-      <div class="turnip-total d-none d-md-block">{{ user.turnipsBought * investor.price}} bells</div>
+      <div class="turnip-profit">{{ user && user.turnipsBought ? user.turnipsBought * (investor.price - user.priceBought) : 0 }} bells</div>
+      <div class="turnip-total d-none d-md-block">{{ user && user.turnipsBought ? user.turnipsBought * investor.price : 0}} bells</div>
     </li>
   </ul>
 </div>
 <ac-modal *ngIf="showModal">
   <div class="info-submission">
-    <label for="turnip-input">{{ priceSubmission ? 'Please enter the price of your turnips: ' : 'Please enter the number of turnips you bought' }}</label>
-    <br>
-    <input id="turnip-input" type="text"/>
-    <button class="btn btn-main btn-slim" (click)="toggleModal()">Submit</button>
+    <form *ngIf="priceSubmission; else bought" [formGroup]="stonkSellForm" (ngSubmit)="submitData()">
+      <label for="cur-price">Current Stonk Price:</label>
+      <input type="text" id="cur-price" formControlName="stonkPrice" [pattern]="pattern"/>
+      <br>
+      <button type="submit" class="btn btn-main btn-slim" [disabled]="!stonkSellForm.valid">Submit Price</button>
+      <button class="btn btn-main btn-slim" (click)="toggleModal()">Cancel</button>
+    </form>
+    <ng-template #bought>
+      <form [formGroup]="stonkBuyForm" (ngSubmit)="submitData()">
+        <label for="price">Price of Stonks you Bought:</label>
+        <input type="text" id="price" formControlName="stonkPrice" [pattern]="pattern"/>
+        <br>
+        <label for="num-bought">Number of Stonks you Bought:</label>
+        <input type="text" id="num-bought" formControlName="stonksBought" [pattern]="pattern"/>
+        <br>
+        <button type="submit" class="btn btn-main btn-slim" [disabled]="!stonkBuyForm.valid">Submit Stonks</button>
+        <button class="btn btn-main btn-slim" (click)="toggleModal()">Cancel</button>
+      </form>
+    </ng-template>
   </div>
 </ac-modal>

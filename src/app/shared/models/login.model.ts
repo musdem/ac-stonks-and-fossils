@@ -36,3 +36,9 @@ export class JtwToken {
     public key: string
   ) {}
 }
+
+export class PubKey {
+  constructor(
+    public key: string
+  ) {}
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../shared/services/login-service/login.service';
-import { Create, CreateResponse, Login, LoginResponse } from '../shared/models/login.model';
+import { Create, Login, LoginResponse } from '../shared/models/login.model';
 import { User } from '../shared/models/user.model';
 import { ToastService } from '../shared/services/toast-service/toast.service';
 import { Toast } from '../shared/models/toast.model';
@@ -32,13 +32,15 @@ export class HeaderComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private toastService: ToastService
-  ) { }
+  ) {
+    loginService.updateLoginStatus().subscribe(
+      status => this.loggedIn = status
+    );
+  }
 
   ngOnInit(): void {
-    if (localStorage.user) {
-      this.account = JSON.parse(localStorage.user);
-      this.loggedIn = true;
-    }
+    this.account = this.loginService.getUser();
+    this.loggedIn = !!this.account;
   }
 
   startCreateAccount() {
@@ -71,6 +73,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.loginService.logout();
+    this.loginService.updateLoginStatus().next(false);
     this.loggedIn = false;
   }
 
@@ -81,7 +84,8 @@ export class HeaderComponent implements OnInit {
   handleLogin(login: LoginResponse) {
     this.showToast(`successfully logged in as ${login.name}`, true);
     this.account = new User(login.name, login.priceBought, login.turnipsBought);
-    this.loggedIn = true;
+    this.loginService.updateLoginStatus().next(true);
+    this.loginService.setPubKey();
     this.loginService.setUser(this.account);
     this.loginService.setJwt(login.token);
   }

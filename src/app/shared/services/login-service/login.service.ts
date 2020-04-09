@@ -1,7 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Create, CreateResponse, JtwToken, Login, LoginResponse } from '../../models/login.model';
+import { Create, CreateResponse, JtwToken, Login, LoginResponse, PubKey } from '../../models/login.model';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import { User } from '../../models/user.model';
 import { api } from '../../../../environments/environment';
 
@@ -14,6 +15,7 @@ export class LoginService {
   pubKey: string;
   user: User;
   isBrowser: boolean;
+  private logggedIn = new Subject<boolean>();
 
   constructor(
     // tslint:disable-next-line:ban-types
@@ -40,11 +42,16 @@ export class LoginService {
     }
   }
 
-  setPubKey(pubKey: string) {
+  setPubKey() {
     if (this.isBrowser) {
-      localStorage.setItem('pubKey', pubKey);
+      this.http.get<PubKey>(`${api.base}${api.getPubKey}`).subscribe(
+        key => {
+          this.pubKey = key.key;
+          localStorage.setItem('pubKey', this.pubKey);
+        }
+      );
     } else {
-      this.pubKey = pubKey;
+      this.pubKey = '';
     }
   }
 
@@ -91,5 +98,9 @@ export class LoginService {
 
   callPubKey() {
     return this.http.get<string>(`${api.base}${api.getPubKey}`);
+  }
+
+  updateLoginStatus() {
+    return this.logggedIn;
   }
 }

@@ -29,3 +29,11 @@ ul {
 .btn-slim {
   padding: 4px 16px;
 }
+
+input {
+  background: $ac-light-brown;
+  color: $ac-brown;
+  border-radius: 5px;
+  border: 1px $ac-brown solid;
+  margin: 0 6px;
+}
