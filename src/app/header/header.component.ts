@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../shared/services/login-service/login.service';
-import {Create, CreateResponse, Login, LoginResponse} from '../shared/models/login.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../shared/services/login-service/login.service';
+import { Create, CreateResponse, Login, LoginResponse } from '../shared/models/login.model';
 import { User } from '../shared/models/user.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ToastService } from '../shared/services/toast-service/toast.service';
+import { Toast } from '../shared/models/toast.model';
 
 @Component({
   selector: 'ac-header',
@@ -28,7 +30,8 @@ export class HeaderComponent implements OnInit {
   loggedIn = false;
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -52,8 +55,8 @@ export class HeaderComponent implements OnInit {
     const user = this.createForm.value as Create;
     this.loginService.createAccount(user).subscribe(
       // TODO change this into some kind of site wide popup system
-      status => this.handleCreateAccount(status),
-      error => alert(error)
+      status => this.showToast(`successfully created account for ${status.user}`, true),
+      error => this.showToast(error.error.status, false)
     );
   }
 
@@ -62,7 +65,7 @@ export class HeaderComponent implements OnInit {
     this.loginService.login(info).subscribe(
       // TODO change this into some kind of site wide popup system
       status => this.handleLogin(status),
-      error => alert(error.error.status)
+      error => this.showToast(error.error.status, false)
     );
   }
 
@@ -75,18 +78,17 @@ export class HeaderComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
-  handleCreateAccount(account: CreateResponse) {
-    alert(`successfully created account for ${account.user}`);
-    this.toggleModal();
-  }
-
   handleLogin(login: LoginResponse) {
-    alert(`successfully logged in as ${login.name}`);
+    this.showToast(`successfully logged in as ${login.name}`, true);
     this.account = new User(login.name, login.priceBought, login.turnipsBought);
     this.loggedIn = true;
     this.loginService.setUser(this.account);
     this.loginService.setJwt(login.token);
+  }
+
+  showToast(message: string, success: boolean) {
     this.toggleModal();
+    this.toastService.getToasts().next(new Toast(message, 5, success));
   }
 
 }

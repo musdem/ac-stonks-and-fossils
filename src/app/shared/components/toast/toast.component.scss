@@ -1,0 +1,31 @@
+@import '../../../../assets/variables';
+
+.toast-wrapper {
+  max-height: 4rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  color: white;
+  bottom: -4rem;
+  z-index: 2;
+  transition: bottom .5s;
+
+  &.toast-pop {
+    bottom: 0;
+  }
+
+  .toast-message {
+    text-align: center;
+    margin: auto;
+    padding: .5rem 1rem;
+    border-radius: 1rem 1rem 0 0;
+
+    &.toast-success {
+      background: $ac-green;
+    }
+    &.toast-failure {
+      background: $ac-red;
+    }
+  }
+}

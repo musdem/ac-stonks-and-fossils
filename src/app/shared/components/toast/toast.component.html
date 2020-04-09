@@ -1,0 +1,15 @@
+<div
+  class="toast-wrapper"
+  [ngClass]="{
+    'toast-pop': this.visible
+  }"
+>
+  <div
+    class="toast-message"
+    [ngClass]="{
+    'toast-success': this.toast.success,
+    'toast-failure': !this.toast.success
+  }">
+    <span>{{ toast.message }}</span>
+  </div>
+</div>

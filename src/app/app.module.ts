@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     StonkDashboardComponent,
     FossilsDashboardComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
