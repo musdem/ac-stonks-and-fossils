@@ -23,7 +23,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
     ToastComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
