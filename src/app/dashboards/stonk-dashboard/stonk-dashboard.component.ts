@@ -37,7 +37,7 @@ export class StonkDashboardComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     loginService.updateLoginStatus().subscribe(
-      status => this.handleLogin(status)
+      user => this.handleLogin(user)
     );
     stonkService.getStonks().subscribe(
       stonks => this.investors = stonks,
@@ -48,12 +48,11 @@ export class StonkDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.loginService.getUser();
     this.loggedIn = !!this.user;
-    console.log(this.user);
   }
 
-  private handleLogin(status: boolean) {
-    if (status) {
-      this.user = this.loginService.getUser();
+  private handleLogin(newUser: User) {
+    if (newUser) {
+      this.user = new User(newUser.name, newUser.priceBought, newUser.turnipsBought);
       this.loggedIn = true;
     } else {
       this.user = null;

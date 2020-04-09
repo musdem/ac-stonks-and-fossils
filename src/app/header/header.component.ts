@@ -34,21 +34,11 @@ export class HeaderComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private toastService: ToastService
-  ) {
-    loginService.updateLoginStatus().subscribe(
-      status => this.loggedIn = status
-    );
-  }
+  ) { }
 
   ngOnInit(): void {
     this.account = this.loginService.getUser();
     this.loggedIn = !!this.account;
-  }
-
-  checkPasswords(form: FormGroup) {
-    const password = form.get('password').value;
-    const passwordConfirm = form.get('passwordConfirm').value;
-    return password === passwordConfirm
   }
 
   startCreateAccount() {
@@ -64,7 +54,6 @@ export class HeaderComponent implements OnInit {
   createAccount() {
     const user = this.createForm.value as Create;
     this.loginService.createAccount(user).subscribe(
-      // TODO change this into some kind of site wide popup system
       status => this.showToast(`successfully created account for ${status.user}`, true),
       error => this.showToast(error.error.status, false)
     );
@@ -73,7 +62,6 @@ export class HeaderComponent implements OnInit {
   login() {
     const info = this.loginForm.value as Login;
     this.loginService.login(info).subscribe(
-      // TODO change this into some kind of site wide popup system
       status => this.handleLogin(status),
       error => this.showToast(error.error.status, false)
     );
@@ -81,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.loginService.logout();
-    this.loginService.updateLoginStatus().next(false);
+    this.loginService.updateLoginStatus().next(null);
     this.loggedIn = false;
   }
 
@@ -92,10 +80,11 @@ export class HeaderComponent implements OnInit {
   handleLogin(login: LoginResponse) {
     this.showToast(`successfully logged in as ${login.name}`, true);
     this.account = new User(login.name, login.priceBought, login.turnipsBought);
-    this.loginService.updateLoginStatus().next(true);
     this.loginService.setPubKey();
     this.loginService.setUser(this.account);
     this.loginService.setJwt(login.token);
+    this.loginService.updateLoginStatus().next(this.account);
+    this.loggedIn = true;
   }
 
   showToast(message: string, success: boolean) {

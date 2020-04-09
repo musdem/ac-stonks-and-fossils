@@ -15,7 +15,7 @@ export class LoginService {
   pubKey: string;
   user: User;
   isBrowser: boolean;
-  private logggedIn = new Subject<boolean>();
+  private loggedIn = new Subject<User>();
 
   constructor(
     // tslint:disable-next-line:ban-types
@@ -101,6 +101,6 @@ export class LoginService {
   }
 
   updateLoginStatus() {
-    return this.logggedIn;
+    return this.loggedIn;
   }
 }
