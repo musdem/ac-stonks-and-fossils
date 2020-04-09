@@ -38,7 +38,13 @@
         <label for="passwordCreate">Password:</label>
         <input type="password" id="passwordCreate" formControlName="password"/>
         <br>
+        <label for="passwordConfirm">Confirm your Password:</label>
+        <input type="password" id="passwordConfirm" formControlName="passwordConfirm"/>
+        <br>
         <button class="btn btn-main btn-slim" type="submit" [disabled]="!createForm.valid">Create Account</button>
+        <p class="error" *ngIf="createForm.get('confirmPassword').errors && createForm.get('confirmPassword').errors.ConfirmPassword">
+          Passsword and ConfirmPassword didn't match.
+        </p>
       </form>
     </div>
   </ng-template>

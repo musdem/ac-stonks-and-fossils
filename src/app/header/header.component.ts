@@ -5,6 +5,7 @@ import { Create, Login, LoginResponse } from '../shared/models/login.model';
 import { User } from '../shared/models/user.model';
 import { ToastService } from '../shared/services/toast-service/toast.service';
 import { Toast } from '../shared/models/toast.model';
+import { ConfirmPasswordValidator } from './validators/password-match/password-match.validator';
 
 @Component({
   selector: 'ac-header',
@@ -21,8 +22,9 @@ export class HeaderComponent implements OnInit {
   createForm = new FormGroup({
     username: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  });
+    password: new FormControl('', Validators.required),
+    passwordConfirm: new FormControl('', Validators.required)
+  }, ConfirmPasswordValidator.MatchPassword);
 
   account: User;
   showModal = false;
@@ -41,6 +43,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.account = this.loginService.getUser();
     this.loggedIn = !!this.account;
+  }
+
+  checkPasswords(form: FormGroup) {
+    const password = form.get('password').value;
+    const passwordConfirm = form.get('passwordConfirm').value;
+    return password === passwordConfirm
   }
 
   startCreateAccount() {

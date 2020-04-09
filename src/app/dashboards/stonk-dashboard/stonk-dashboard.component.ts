@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from '../../shared/models/user.model';
-import {BuyStonks, SellStonks, Stonk, StonkSuccess} from '../../shared/models/stonks.model';
+import { BuyStonks, SellStonks, StonkSuccess } from '../../shared/models/stonks.model';
 import { LoginService } from '../../shared/services/login-service/login.service';
 import { StonksService } from '../../shared/services/stonks-service/stonks.service';
-import {ToastService} from '../../shared/services/toast-service/toast.service';
-import {Toast} from '../../shared/models/toast.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ToastService } from '../../shared/services/toast-service/toast.service';
+import { Toast } from '../../shared/models/toast.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ac-stonk-dashboard',
