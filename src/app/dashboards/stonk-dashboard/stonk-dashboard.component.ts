@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from '../../shared/models/user.model';
-import { BuyStonks, SellStonks, StonkSuccess } from '../../shared/models/stonks.model';
+import {BuyStonks, SellStonks, Stonk, StonkSuccess} from '../../shared/models/stonks.model';
 import { LoginService } from '../../shared/services/login-service/login.service';
 import { StonksService } from '../../shared/services/stonks-service/stonks.service';
 import { ToastService } from '../../shared/services/toast-service/toast.service';
@@ -95,8 +95,10 @@ export class StonkDashboardComponent implements OnInit {
     for (const investor of this.investors) {
       if (investor.name === status.user) {
         investor.price = price;
+        return;
       }
     }
+    this.investors.push(new Stonk(status.user, price));
   }
 
   handleBuyStonks(status: StonkSuccess, stonksBought: number, stonkPrice: number) {

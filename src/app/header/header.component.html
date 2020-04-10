@@ -42,6 +42,7 @@
         <input type="password" id="passwordConfirm" formControlName="passwordConfirm"/>
         <br>
         <button class="btn btn-main btn-slim" type="submit" [disabled]="!createForm.valid">Create Account</button>
+        <button class="btn btn-main btn-slim" (click)="toggleModal()">Cancel</button>
         <p class="error" *ngIf="createForm.get('confirmPassword').errors && createForm.get('confirmPassword').errors.ConfirmPassword">
           Passsword and ConfirmPassword didn't match.
         </p>
