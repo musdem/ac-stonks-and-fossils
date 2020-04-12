@@ -9,6 +9,7 @@ import fossilList from '../../../assets/fossils';
 export class FossilsDashboardComponent implements OnInit {
 
   showModal = false;
+  showAds = false;
 
   constructor() { }
 
@@ -23,8 +24,20 @@ export class FossilsDashboardComponent implements OnInit {
     this.toggleModal();
   }
 
+  showDeleteFossils() {
+    this.toggleModal();
+  }
+
+  showUpdateOwnedFossils() {
+    this.toggleModal();
+  }
+
   toggleModal() {
     this.showModal = !this.showModal;
+  }
+
+  swapTabs() {
+    this.showAds = !this.showAds;
   }
 
 }

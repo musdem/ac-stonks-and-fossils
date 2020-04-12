@@ -1,0 +1,32 @@
+@import '../../../assets/variables';
+
+.fossil-contents {
+  .fossil-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fossil-tab {
+      flex: 1;
+      padding: 20px;
+      color: $ac-light-brown;
+      background-color: $ac-brown;
+      border: none;
+      &:disabled {
+        color: $ac-brown;
+        background-color: $ac-yellow;
+      }
+    }
+    :first-child {
+      border-top-left-radius: 20px;
+    }
+    :last-child {
+      border-top-right-radius: 20px;
+    }
+  }
+  .fossil-tab-contents {
+    padding: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: $ac-light-brown;
+  }
+}

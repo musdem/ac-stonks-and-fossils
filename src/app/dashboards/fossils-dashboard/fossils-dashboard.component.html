@@ -1,9 +1,32 @@
 <div class="fossil-controls">
-  <button class="btn btn-main" (click)="showSellFossils()">Sell Fossils</button>
-  <button class="btn btn-main" (click)="showBuyFossils()">Buy Fossils</button>
+  <button class="btn btn-main" (click)="showSellFossils()">Post Selling Fossil Ad</button>
+  <button class="btn btn-main" (click)="showBuyFossils()">Post Buying Fossil Ad</button>
+  <button class="btn btn-main" (click)="showDeleteFossils()">Delete Fossil Ad</button>
+  <button class="btn btn-main" (click)="showUpdateOwnedFossils()">Update Fossils you own</button>
 </div>
-<div class="user-fossils">
-  <h1>Coming soon!</h1>
+<div class="fossil-contents">
+  <div class="fossil-tabs">
+    <button
+      [ngClass]="{'fossil-tab': true, 'active': !showAds}"
+      [disabled]="!showAds"
+      (click)="swapTabs()"
+    >Fossils Owned</button>
+    <button
+      [ngClass]="{'fossil-tab': true, 'active': showAds}"
+      [disabled]="showAds"
+      (click)="swapTabs()"
+    >Fossil Ads</button>
+  </div>
+  <div class="fossil-tab-contents">
+    <div *ngIf="showAds;else ownedFossils">
+      <p>this is for the fossil ads</p>
+    </div>
+    <ng-template #ownedFossils>
+      <div>
+        <p>this is for the owned fossils</p>
+      </div>
+    </ng-template>
+  </div>
 </div>
 
 <ac-modal *ngIf="showModal">
