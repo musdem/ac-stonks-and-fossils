@@ -1,142 +1,469 @@
-export const fossilList = [
+export default [
   {
-    "name": "Acanthostega",
-    "parts": ["One Fossil"]
+    "name":"Acanthostega",
+    "parts":[
+      {
+        "id":"a0cd8947-e5a3-4af6-8ae2-db53a4820acc",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Amber",
-    "parts": ["One Fossil"]
+    "name":"Amber",
+    "parts":[
+      {
+        "id":"ed0b52f7-9aa6-4a1b-92e2-7b8d4286946b",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Ammonite",
-    "parts": ["One Fossil"]
+    "name":"Ammonite",
+    "parts":[
+      {
+        "id":"03824848-13ff-45c6-be73-fcf62f81f9b6",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Anomalocaris",
-    "parts": ["One Fossil"]
+    "name":"Anomalocaris",
+    "parts":[
+      {
+        "id":"b11ac33c-6217-4586-831e-58f7df14162d",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Dunkleosteus",
-    "parts": ["One Fossil"]
+    "name":"Dunkleosteus",
+    "parts":[
+      {
+        "id":"c31b399c-6d8b-4876-b991-e30970c5e75c",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Eusthenopteron",
-    "parts": ["One Fossil"]
+    "name":"Eusthenopteron",
+    "parts":[
+      {
+        "id":"4298312d-5e5d-454d-866c-87b0f5d27a8b",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Myllokunmingia",
-    "parts": ["One Fossil"]
+    "name":"Myllokunmingia",
+    "parts":[
+      {
+        "id":"25c14378-d1b1-4dcf-8883-f8084d2adb15",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Shark-Tooth Pattern (Helicoprion)",
-    "parts": ["One Fossil"]
+    "name":"Shark-Tooth Pattern (Helicoprion)",
+    "parts":[
+      {
+        "id":"c5712f03-b598-40d6-903a-bbc96e73121d",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Trilobite",
-    "parts": ["One Fossil"]
+    "name":"Trilobite",
+    "parts":[
+      {
+        "id":"78c9066d-8427-47c0-bec2-faf9981718a6",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Archelon",
-    "parts": ["Skull", "Tail"]
+    "name":"Archelon",
+    "parts":[
+      {
+        "id":"61180e2b-2219-4215-a149-9f2c5cbf55e3",
+        "part":"Skull"
+      },
+      {
+        "id":"bee69b36-520a-4f93-853b-967581b19ad5",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Ophthalmosaurus",
-    "parts": ["Skull", "Torso"]
+    "name":"Ophthalmosaurus",
+    "parts":[
+      {
+        "id":"e4994c02-f16a-46ba-b93d-83b924c1c537",
+        "part":"Skull"
+      },
+      {
+        "id":"c39a583b-b168-40ee-b178-f8cc585a330b",
+        "part":"Torso"
+      }
+    ]
   },
   {
-    "name": "Plesiosaurus",
-    "parts": ["Skull", "Body", "Tail"]
+    "name":"Plesiosaurus",
+    "parts":[
+      {
+        "id":"ecf2a0ef-ec3c-4bb3-87c4-34f74f01736f",
+        "part":"Skull"
+      },
+      {
+        "id":"9c1b254a-b61a-4b30-bd4d-e7b07ec9541a",
+        "part":"Body"
+      },
+      {
+        "id":"79cc61fc-5b8d-405c-b96c-f6b845e8b38a",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Pteranodon",
-    "parts": ["Right Wing", "Body", "Left Wing"]
+    "name":"Pteranodon",
+    "parts":[
+      {
+        "id":"7301f54a-c65f-4a9b-89f8-44874b591281",
+        "part":"Right Wing"
+      },
+      {
+        "id":"d69b920f-1772-43dd-b36a-673e3a6ed116",
+        "part":"Body"
+      },
+      {
+        "id":"6bcebdd4-8e3f-44e3-968b-3ffed5b901a7",
+        "part":"Left Wing"
+      }
+    ]
   },
   {
-    "name": "Quetzalcoatlus",
-    "parts": ["Left Wing", "Right Wing", "Torso"]
+    "name":"Quetzalcoatlus",
+    "parts":[
+      {
+        "id":"8b531618-ff53-455a-87dd-389a7aedbad7",
+        "part":"Left Wing"
+      },
+      {
+        "id":"3b04d369-0146-4300-be63-120d1af47702",
+        "part":"Right Wing"
+      },
+      {
+        "id":"f5ce3a5a-2a5c-464d-858d-7517dae8ef98",
+        "part":"Torso"
+      }
+    ]
   },
   {
-    "name": "Brachiosaurus",
-    "parts": ["Skull", "Chest", "Pelvis", "Tail"]
+    "name":"Brachiosaurus",
+    "parts":[
+      {
+        "id":"dfbf0592-6fca-4379-8b34-cbc782f9eb83",
+        "part":"Skull"
+      },
+      {
+        "id":"2a07ed0e-7ae3-4143-b006-4d6caae8c838",
+        "part":"Chest"
+      },
+      {
+        "id":"fcb02be5-6a9a-4717-b305-061e8b1f3165",
+        "part":"Pelvis"
+      },
+      {
+        "id":"46c0b5d8-a59b-447c-ac10-40c60d1ba4c4",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Diplodocus",
-    "parts": ["Skull", "Neck", "Chest", "Pelvis", "Tail", "Tail Tip"]
+    "name":"Diplodocus",
+    "parts":[
+      {
+        "id":"c2f8e937-3b6e-4232-8a27-db6df5e19b61",
+        "part":"Skull"
+      },
+      {
+        "id":"4f3b27b8-0858-4d16-abf6-f1e4742d8c87",
+        "part":"Neck"
+      },
+      {
+        "id":"cf281312-c905-4570-9d98-a75e8c35790f",
+        "part":"Chest"
+      },
+      {
+        "id":"739b8585-e169-4ab5-84f7-ce0ddc60705b",
+        "part":"Pelvis"
+      },
+      {
+        "id":"5a089877-8eb6-430f-91f7-1f32319f6672",
+        "part":"Tail"
+      },
+      {
+        "id":"2964973f-fe93-4fe7-a257-c37bb909d8f3",
+        "part":"Tail Tip"
+      }
+    ]
   },
   {
-    "name": "Dimetrodon",
-    "parts": ["Skull", "Tail"]
+    "name":"Dimetrodon",
+    "parts":[
+      {
+        "id":"d7066ae6-058e-4e12-9450-f528b640c72f",
+        "part":"Skull"
+      },
+      {
+        "id":"1cbbd567-63fd-44c5-b99e-f65684a97e9d",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Juramaia",
-    "parts": ["One Fossil"]
+    "name":"Juramaia",
+    "parts":[
+      {
+        "id":"c8f1fc8b-e3cb-491c-8737-5a2d8a381b5e",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Ankylosaurus",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Ankylosaurus",
+    "parts":[
+      {
+        "id":"474c4238-74d2-4de4-9f73-3af047cbf500",
+        "part":"Skull"
+      },
+      {
+        "id":"7373a5b0-fecd-43a5-b85c-c5d9c959de25",
+        "part":"Torso"
+      },
+      {
+        "id":"2b030e54-ee9b-42fe-b418-d58bea2bfe04",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Iguanodon",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Iguanodon",
+    "parts":[
+      {
+        "id":"c0fa4d35-2ff9-476c-a843-0b573598d327",
+        "part":"Skull"
+      },
+      {
+        "id":"848368b8-11da-4c26-b699-7e5d1e10962d",
+        "part":"Torso"
+      },
+      {
+        "id":"9c635922-375a-40fa-a8d6-b37a1292acc1",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Pachycephalosaurus",
-    "parts": ["Skull", "Tail"]
+    "name":"Pachycephalosaurus",
+    "parts":[
+      {
+        "id":"d6726372-7532-4d14-9614-9c568dc09272",
+        "part":"Skull"
+      },
+      {
+        "id":"01524b9b-3fe6-4d16-9240-f86962eb0872",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Parasaurolophus",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Parasaurolophus",
+    "parts":[
+      {
+        "id":"b20fd85a-3ee1-4a68-b695-f1349829ec17",
+        "part":"Skull"
+      },
+      {
+        "id":"80688adb-c4c4-41e1-9a09-dc45c9c6df09",
+        "part":"Torso"
+      },
+      {
+        "id":"29211a25-0863-4cd4-ae98-9b94fa4cf635",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Stegosaurus",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Stegosaurus",
+    "parts":[
+      {
+        "id":"1b43c234-86c4-4e4e-a5fd-d29136b1874d",
+        "part":"Skull"
+      },
+      {
+        "id":"14086f68-c2ad-431b-8213-fae87104892e",
+        "part":"Torso"
+      },
+      {
+        "id":"32e1b541-a8f3-4d83-8750-8140f8a00720",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Triceratops",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Triceratops",
+    "parts":[
+      {
+        "id":"51c0a4e2-3e67-4aec-b9c2-c847f7f0a147",
+        "part":"Skull"
+      },
+      {
+        "id":"52090f5f-6475-4972-996e-f75d95f916f2",
+        "part":"Torso"
+      },
+      {
+        "id":"a752d234-9b45-48be-9d4c-8a9cceef8d1e",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Archaeopteryx",
-    "parts": ["One Fossil"]
+    "name":"Archaeopteryx",
+    "parts":[
+      {
+        "id":"887e2cbe-d6e2-4f18-8a85-7e148fd10cb0",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Coprolite",
-    "parts": ["One Fossil"]
+    "name":"Coprolite",
+    "parts":[
+      {
+        "id":"e7f658d2-836c-4770-bae6-997dcef81fae",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Deinonychus",
-    "parts": ["Torso", "Tail"]
+    "name":"Deinonychus",
+    "parts":[
+      {
+        "id":"ab5dd45d-0950-4c6d-8b2e-20e981d62c2f",
+        "part":"Torso"
+      },
+      {
+        "id":"cebbc640-2703-4272-b29a-6d9f5a6583a5",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Dinosaur Track",
-    "parts": ["One Fossil"]
+    "name":"Dinosaur Track",
+    "parts":[
+      {
+        "id":"87f94ba0-6ea4-46dc-aeef-4a1c2d9661d8",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Spinosaurus",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Spinosaurus",
+    "parts":[
+      {
+        "id":"ca443385-9032-4b62-8b8e-8c8f4d122eb3",
+        "part":"Skull"
+      },
+      {
+        "id":"7e4583eb-8c61-47ec-a97a-8459b574ed90",
+        "part":"Torso"
+      },
+      {
+        "id":"07c6f01c-7efd-4ff2-b868-6dad2f8af948",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Tyrannosaurus Rex",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Tyrannosaurus Rex",
+    "parts":[
+      {
+        "id":"6dc68894-045d-4739-b0b7-a507aba22f24",
+        "part":"Skull"
+      },
+      {
+        "id":"d27bd062-34ce-4dd6-bf9e-e848ddfb951d",
+        "part":"Torso"
+      },
+      {
+        "id":"992e8837-37bf-4369-8fae-f94d9fd23013",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Australopith",
-    "parts": ["One Fossil"]
+    "name":"Australopith",
+    "parts":[
+      {
+        "id":"0ee19700-a26c-441c-bfdd-4ea8df640d4c",
+        "part":"One Fossil"
+      }
+    ]
   },
   {
-    "name": "Mammoth",
-    "parts": ["Skull", "Torso"]
+    "name":"Mammoth",
+    "parts":[
+      {
+        "id":"85c409f5-7970-4678-a4d5-f0b0f16d8a52",
+        "part":"Skull"
+      },
+      {
+        "id":"ecc39256-b630-4568-abde-da0ff145e2b5",
+        "part":"Torso"
+      }
+    ]
   },
   {
-    "name": "Megacerops",
-    "parts": ["Skull", "Torso", "Tail"]
+    "name":"Megacerops",
+    "parts":[
+      {
+        "id":"a3ffcd7f-a0ba-4f2c-9c0c-ab2be52c96c7",
+        "part":"Skull"
+      },
+      {
+        "id":"a650505d-4e05-4d45-8e15-24d6ec7bef9d",
+        "part":"Torso"
+      },
+      {
+        "id":"728d8eeb-54f2-47d3-a6f4-bce930d84914",
+        "part":"Tail"
+      }
+    ]
   },
   {
-    "name": "Megaloceros",
-    "parts": ["Right Side", "Left Side"]
+    "name":"Megaloceros",
+    "parts":[
+      {
+        "id":"3d9f5c17-092e-44cb-9767-0546c042cdc3",
+        "part":"Right Side"
+      },
+      {
+        "id":"add51410-da1b-411d-bdb4-6f5229d5fe3b",
+        "part":"Left Side"
+      }
+    ]
   },
   {
-    "name": "Sabre-tooth Tiger",
-    "parts": ["Skull", "Tail"]
+    "name":"Sabre-tooth Tiger",
+    "parts":[
+      {
+        "id":"f8b789cd-eff0-40a0-a5cd-4a86e44ee71e",
+        "part":"Skull"
+      },
+      {
+        "id":"ab3fce9f-aa9f-427a-8979-f7845c9835e5",
+        "part":"Tail"
+      }
+    ]
   }
 ];

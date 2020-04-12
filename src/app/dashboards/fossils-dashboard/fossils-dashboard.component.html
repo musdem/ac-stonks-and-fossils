@@ -18,12 +18,18 @@
     >Fossil Ads</button>
   </div>
   <div class="fossil-tab-contents">
-    <div *ngIf="showAds;else ownedFossils">
+    <div *ngIf="showAds;else ownedFossils" class="fossil-ads">
       <p>this is for the fossil ads</p>
     </div>
     <ng-template #ownedFossils>
-      <div>
-        <p>this is for the owned fossils</p>
+      <div *ngFor="let fossil of fossilList" class="owned-fossils">
+        <div class="fossil-name">{{ fossil.name }}</div>
+        <div class="fossil-parts">
+          <div *ngFor="let part of fossil.parts" class="fossil-part">
+            <div class="part-name"><label for="{{ part.id }}">{{ part.part }}</label></div>
+            <div class="owns-part"><input id="{{ part.id }}" type="checkbox"/></div>
+          </div>
+        </div>
       </div>
     </ng-template>
   </div>
