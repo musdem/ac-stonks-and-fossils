@@ -19,6 +19,7 @@ export class FossilsDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO go through the list of part ids that the user owns once and check the checkbox of the corresponding html id
+    // TODO probably should use something like ngAfterViewChecked to update if you own fossils or not if there is a race condition
   }
 
   showSellFossils() {
