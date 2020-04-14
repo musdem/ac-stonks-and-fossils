@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit {
 
   handleLogin(login: LoginResponse) {
     this.showToast(`successfully logged in as ${login.name}`, true);
-    this.account = new User(login.name, login.priceBought, login.turnipsBought);
+    this.account = new User(login.name, login.priceBought, login.turnipsBought, login.fossilsOwned);
     this.loginService.setPubKey();
     this.loginService.setUser(this.account);
     this.loginService.setJwt(login.token);

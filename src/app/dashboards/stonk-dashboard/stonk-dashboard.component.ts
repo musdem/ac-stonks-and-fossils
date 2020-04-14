@@ -52,7 +52,7 @@ export class StonkDashboardComponent implements OnInit {
 
   private handleLogin(newUser: User) {
     if (newUser) {
-      this.user = new User(newUser.name, newUser.priceBought, newUser.turnipsBought);
+      this.user = new User(newUser.name, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
       this.loggedIn = true;
     } else {
       this.user = null;
@@ -98,7 +98,7 @@ export class StonkDashboardComponent implements OnInit {
         return;
       }
     }
-    this.investors.push(new Stonk(status.user, price));
+    this.investors.push(new Stonk(status.user, status.username, price));
   }
 
   handleBuyStonks(status: StonkSuccess, stonksBought: number, stonkPrice: number) {

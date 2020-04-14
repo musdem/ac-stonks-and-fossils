@@ -1,4 +1,4 @@
-<div class="stonks-controls">
+<div *ngIf="loggedIn && user" class="stonks-controls">
   <button class="btn btn-main" (click)="showPriceSubmit()">Submit Stonk Price</button>
   <button class="btn btn-main" (click)="showBoughtSubmit()">Submit Stonks Bought</button>
 </div>

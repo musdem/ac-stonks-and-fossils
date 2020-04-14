@@ -44,6 +44,10 @@
         align-items: center;
         .fossil-part {
           display: flex;
+          width: 100%;
+          .part-name {
+            margin: auto;
+          }
         }
       }
     }

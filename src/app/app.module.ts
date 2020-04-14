@@ -11,6 +11,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { FossilIdsPipe } from './dashboards/fossils-dashboard/pipes/fossil-ids.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ToastComponent } from './shared/components/toast/toast.component';
     FossilsDashboardComponent,
     HeaderComponent,
     MenuComponent,
-    ToastComponent
+    ToastComponent,
+    FossilIdsPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

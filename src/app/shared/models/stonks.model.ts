@@ -1,6 +1,7 @@
 export class Stonk {
   constructor(
     public name: string,
+    public username: string,
     public price: number
   ) {}
 }
@@ -26,6 +27,7 @@ export class BuyStonks {
 export class StonkSuccess {
   constructor(
     public status: string,
-    public user: string
+    public user: string,
+    public username: string
   ) {}
 }

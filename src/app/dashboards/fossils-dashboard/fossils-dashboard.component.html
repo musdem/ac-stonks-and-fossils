@@ -1,8 +1,8 @@
-<div class="fossil-controls">
+<div *ngIf="fossilUser" class="fossil-controls">
   <button class="btn btn-main" (click)="showSellFossils()">Post Selling Fossil Ad</button>
   <button class="btn btn-main" (click)="showBuyFossils()">Post Buying Fossil Ad</button>
   <button class="btn btn-main" (click)="showDeleteFossils()">Delete Fossil Ad</button>
-  <button class="btn btn-main" (click)="showUpdateOwnedFossils()">Update Fossils you own</button>
+  <button class="btn btn-main" (click)="updateOwnedFossils()">Update Fossils you own</button>
 </div>
 <div class="fossil-contents">
   <div class="fossil-tabs">
@@ -19,18 +19,29 @@
   </div>
   <div class="fossil-tab-contents">
     <div *ngIf="showAds;else ownedFossils" class="fossil-ads">
-      <p>this is for the fossil ads</p>
+      <div class="fossil-ads-titles">
+        <div>Name</div>
+        <div>Part Name</div>
+        <div>Price</div>
+      </div>
+      <div class="fossil-ads" *ngFor="let fossilAd of fossilAds">
+        <div>{{ fossilAd.name }}</div>
+        <div id="{{ fossilAd.partId }}">{{ fossilAd.partId | fossilIds }}</div>
+        <div>{{ fossilAd.price }}</div>
+      </div>
     </div>
     <ng-template #ownedFossils>
-      <div *ngFor="let fossil of fossilList" class="owned-fossils">
-        <div class="fossil-name">{{ fossil.name }}</div>
-        <div class="fossil-parts">
-          <div *ngFor="let part of fossil.parts" class="fossil-part">
-            <div class="part-name"><label for="{{ part.id }}">{{ part.part }}</label></div>
-            <div class="owns-part"><input id="{{ part.id }}" type="checkbox"/></div>
+      <form [formGroup]="ownedForm">
+        <div *ngFor="let fossil of fossilList" class="owned-fossils">
+          <div class="fossil-name">{{ fossil.name }}</div>
+          <div class="fossil-parts">
+            <div *ngFor="let part of fossil.parts" class="fossil-part">
+              <div class="part-name"><label for="{{ part.id }}">{{ part.part }}</label></div>
+              <div *ngIf="fossilUser" class="owns-part"><input id="{{ part.id }}" type="checkbox" formControlName="{{ part.id }}"/></div>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </ng-template>
   </div>
 </div>
