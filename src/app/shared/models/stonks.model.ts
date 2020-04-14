@@ -10,7 +10,6 @@ export class SellStonks {
   constructor(
     public token: string,
     public key: string,
-    public name: string,
     public price: string
   ) {}
 }

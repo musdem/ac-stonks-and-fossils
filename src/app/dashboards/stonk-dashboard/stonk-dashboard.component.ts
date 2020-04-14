@@ -74,7 +74,7 @@ export class StonkDashboardComponent implements OnInit {
   submitData() {
     if (this.priceSubmission) {
       const price = this.stonkSellForm.value.stonkPrice;
-      const stonk = new SellStonks(this.loginService.getJwt(), this.loginService.getPubKey(), this.user.name, price);
+      const stonk = new SellStonks(this.loginService.getJwt(), this.loginService.getPubKey(), price);
       this.stonkService.sellStonks(stonk).subscribe(
         status => this.handleSellStonks(status, price),
         error => this.showToast(error.error.status, false)

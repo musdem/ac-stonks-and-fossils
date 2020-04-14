@@ -1,8 +1,12 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import fossilList from '../../../assets/fossils';
 import { LoginService } from '../../shared/services/login-service/login.service';
 import {User} from '../../shared/models/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {FossilService} from '../../shared/services/fossil-service/fossil.service';
+import {UpdateFossil} from '../../shared/models/fossil.model';
+import {ToastService} from '../../shared/services/toast-service/toast.service';
+import {Toast} from '../../shared/models/toast.model';
 
 @Component({
   selector: 'ac-fossils-dashboard',
@@ -12,6 +16,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
 
   fossilUser: User;
+  loggedIn = false;
+  fossilAction: string;
   showModal = false;
   showAds = false;
   fossilList = fossilList;
@@ -95,8 +101,19 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
   );
 
   constructor(
-    private loginService: LoginService
-  ) { }
+    private cd: ChangeDetectorRef,
+    private toastService: ToastService,
+    private loginService: LoginService,
+    private fossilService: FossilService
+  ) {
+    loginService.updateLoginStatus().subscribe(
+      user => this.handleLogin(user)
+    );
+    fossilService.getFossilAds().subscribe(
+      fossilAds => this.fossilAds = fossilAds,
+      error => this.showToast(error.error.status, false)
+    );
+  }
 
   ngOnInit(): void {
     this.fossilUser = this.loginService.getUser();
@@ -109,16 +126,29 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
       }
     }
   }
+  private handleLogin(newUser: User) {
+    if (newUser) {
+      this.fossilUser = new User(newUser.name, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
+      this.loggedIn = true;
+    } else {
+      this.fossilUser = null;
+      this.loggedIn = false;
+    }
+    this.cd.detectChanges();
+  }
 
   showSellFossils() {
+    this.fossilAction = 'sell';
     this.toggleModal();
   }
 
   showBuyFossils() {
+    this.fossilAction = 'buy';
     this.toggleModal();
   }
 
   showDeleteFossils() {
+    this.fossilAction = 'delete';
     this.toggleModal();
   }
 
@@ -132,7 +162,10 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
         }
       }
     }
-    // TODO handle the list of items
+    this.fossilService.updateUserFossils(new UpdateFossil(ownedFossils as [string])).subscribe(
+      status => this.showToast(`Successfully updated owned fossils for ${status.name}`, false),
+      error => this.showToast(error.error.status, false)
+    );
   }
 
   toggleModal() {
@@ -143,4 +176,7 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
     this.showAds = !this.showAds;
   }
 
+  showToast(message: string, success: boolean) {
+    this.toastService.getToasts().next(new Toast(message, 5, success));
+  }
 }

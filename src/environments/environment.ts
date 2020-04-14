@@ -14,7 +14,12 @@ export const api = {
   getPubKey: '/get-pub-key',
   stonks: '/stonks',
   sellStonks: '?sell=true',
-  buyStonks: '?buy=true'
+  buyStonks: '?buy=true',
+  fossils: '/fossils',
+  sellFossils: '/sell',
+  buyFossils: '/buy',
+  deleteFossils: '/delete',
+  ownedFossils: '/own'
 };
 
 /*
