@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../shared/services/login-service/login.service';
-import { Create, Login, LoginResponse } from '../shared/models/login.model';
+import {Create, JwtToken, Login, LoginResponse} from '../shared/models/login.model';
 import { User } from '../shared/models/user.model';
 import { ToastService } from '../shared/services/toast-service/toast.service';
 import { Toast } from '../shared/models/toast.model';
@@ -39,6 +39,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.account = this.loginService.getUser();
     this.loggedIn = !!this.account;
+    if (this.loggedIn) {
+      this.loginService.updateUser(new JwtToken(this.loginService.getJwt(), this.loginService.getPubKey())).subscribe(
+        user => {
+          this.loginService.setUser(user as User);
+          this.account = user as User;
+          this.loginService.updateLoginStatus().next(user);
+        },
+        () => {
+          this.showToast('Failed to update user information from the server, please login again.', false);
+          this.logout();
+        }
+      );
+    }
   }
 
   startCreateAccount() {

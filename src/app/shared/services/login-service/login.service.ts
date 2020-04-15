@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Create, CreateResponse, JtwToken, Login, LoginResponse, PubKey } from '../../models/login.model';
+import { Create, CreateResponse, JwtToken, Login, LoginResponse, PubKey } from '../../models/login.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { User } from '../../models/user.model';
@@ -92,7 +92,7 @@ export class LoginService {
     localStorage.clear();
   }
 
-  verify(token: JtwToken) {
+  verify(token: JwtToken) {
     return this.http.post<boolean>(`${api.base}${api.verify}`, token);
   }
 
@@ -102,5 +102,9 @@ export class LoginService {
 
   updateLoginStatus() {
     return this.loggedIn;
+  }
+
+  updateUser(token: JwtToken) {
+    return this.http.post<User>(`${api.base}${api.update}`, token);
   }
 }

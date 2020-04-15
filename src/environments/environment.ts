@@ -11,6 +11,7 @@ export const api = {
   login: '/login',
   createAccount: '/create',
   verify: '/verify',
+  update: '/update-info',
   getPubKey: '/get-pub-key',
   stonks: '/stonks',
   sellStonks: '?sell=true',

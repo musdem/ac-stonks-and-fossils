@@ -31,7 +31,7 @@ export class LoginResponse {
   ) {}
 }
 
-export class JtwToken {
+export class JwtToken {
   constructor(
     public token: string,
     public key: string
