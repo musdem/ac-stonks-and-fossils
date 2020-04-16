@@ -30,7 +30,9 @@ import { FossilIdsPipe } from './dashboards/fossils-dashboard/pipes/fossil-ids.p
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    FossilIdsPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

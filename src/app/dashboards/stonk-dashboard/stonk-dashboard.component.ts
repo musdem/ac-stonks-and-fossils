@@ -52,7 +52,7 @@ export class StonkDashboardComponent implements OnInit {
 
   private handleLogin(newUser: User) {
     if (newUser) {
-      this.user = new User(newUser.name, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
+      this.user = new User(newUser.name, newUser.username, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
       this.loggedIn = true;
     } else {
       this.user = null;

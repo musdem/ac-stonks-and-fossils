@@ -2,11 +2,12 @@ import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/c
 import fossilList from '../../../assets/fossils';
 import { LoginService } from '../../shared/services/login-service/login.service';
 import {User} from '../../shared/models/user.model';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FossilService} from '../../shared/services/fossil-service/fossil.service';
-import {UpdateFossil} from '../../shared/models/fossil.model';
+import {FossilAd, PostFossilAd, RemoveFossil, UpdateFossil} from '../../shared/models/fossil.model';
 import {ToastService} from '../../shared/services/toast-service/toast.service';
 import {Toast} from '../../shared/models/toast.model';
+import {FossilIdsPipe} from './pipes/fossil-ids.pipe';
 
 @Component({
   selector: 'ac-fossils-dashboard',
@@ -17,11 +18,13 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
 
   fossilUser: User;
   loggedIn = false;
-  fossilAction: string;
   showModal = false;
   showAds = false;
   fossilList = fossilList;
   fossilAds = [];
+  fossilAdPartId: string;
+  sellingAd: boolean;
+  pattern = '^[1-9]\\d*$';
 
   ownedForm = new FormGroup({
       'a0cd8947-e5a3-4af6-8ae2-db53a4820acc': new FormControl(''),
@@ -100,11 +103,16 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
     }
   );
 
+  fossilAdForm = new FormGroup({
+    price: new FormControl('', Validators.required)
+  });
+
   constructor(
     private cd: ChangeDetectorRef,
     private toastService: ToastService,
     private loginService: LoginService,
-    private fossilService: FossilService
+    private fossilService: FossilService,
+    private pipe: FossilIdsPipe
   ) {
     loginService.updateLoginStatus().subscribe(
       user => this.handleLogin(user)
@@ -128,7 +136,7 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
   }
   private handleLogin(newUser: User) {
     if (newUser) {
-      this.fossilUser = new User(newUser.name, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
+      this.fossilUser = new User(newUser.name, newUser.username, newUser.priceBought, newUser.turnipsBought, newUser.fossilsOwned);
       this.loggedIn = true;
     } else {
       this.fossilUser = null;
@@ -137,19 +145,62 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
     this.cd.detectChanges();
   }
 
-  showSellFossils() {
-    this.fossilAction = 'sell';
+  showMakeFossilAd(sell: boolean, partId: string) {
+    this.sellingAd = sell;
+    this.fossilAdPartId = partId;
     this.toggleModal();
   }
 
-  showBuyFossils() {
-    this.fossilAction = 'buy';
+  createFossilAd() {
+    const price = this.fossilAdForm.get('price').value;
+    if (this.sellingAd) {
+      const selling = true;
+      const fossilSell = new PostFossilAd(
+        this.loginService.getJwt(),
+        this.loginService.getPubKey(),
+        selling,
+        this.fossilAdPartId,
+        price
+      );
+      this.fossilService.postFossilSellAd(fossilSell).subscribe(
+        status => this.handleAdPostSuccess(status, selling, price),
+        () => this.showToast('Failed to post ad, please try again later', false)
+      );
+    } else {
+      const selling = false;
+      const fossilBuy = new PostFossilAd(
+        this.loginService.getJwt(),
+        this.loginService.getPubKey(),
+        selling,
+        this.fossilAdPartId,
+        price
+      );
+      this.fossilService.postFossilBuyAd(fossilBuy).subscribe(
+        status => this.handleAdPostSuccess(status, selling, price),
+        () => this.showToast('Failed to post ad, please try again later', false)
+      );
+    }
     this.toggleModal();
   }
 
-  showDeleteFossils() {
-    this.fossilAction = 'delete';
-    this.toggleModal();
+  handleAdPostSuccess(status, selling, price) {
+    this.showToast(`Successfully posted ad for ${this.pipe.transform(status.itemId)}`, true);
+    this.fossilAds.push(new FossilAd(this.fossilUser.name, this.fossilUser.username, selling, this.fossilAdPartId, price));
+  }
+
+  deleteFossilAd(itemId: string) {
+    const fossilDelete = new RemoveFossil(
+      this.loginService.getJwt(),
+      this.loginService.getPubKey(),
+      itemId
+    );
+    this.fossilService.deleteFossilAd(fossilDelete).subscribe(
+      () => {
+        this.showToast('Successfully deleted your ad.', true);
+        this.fossilAds.splice(this.fossilAds.findIndex(ad => ad.username === this.fossilUser.username && ad.itemId === itemId), 1);
+      },
+      () => this.showToast('Failed to post ad, please try again later', false)
+    );
   }
 
   updateOwnedFossils() {
@@ -157,13 +208,14 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
     for (const id in this.ownedForm.value) {
       if (this.ownedForm.value.hasOwnProperty(id)) {
         const curItem = this.ownedForm.value[id];
-        if (curItem === 'toggled') {
+        if (curItem) {
           ownedFossils.push(id);
         }
       }
     }
-    this.fossilService.updateUserFossils(new UpdateFossil(ownedFossils as [string])).subscribe(
-      status => this.showToast(`Successfully updated owned fossils for ${status.name}`, false),
+    const newFossils = new UpdateFossil(this.loginService.getJwt(), this.loginService.getPubKey(), ownedFossils as [string]);
+    this.fossilService.updateUserFossils(newFossils).subscribe(
+      status => this.showToast(`Successfully updated owned fossils for ${status.name}`, true),
       error => this.showToast(error.error.status, false)
     );
   }

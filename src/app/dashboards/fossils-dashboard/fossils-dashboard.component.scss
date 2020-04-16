@@ -27,6 +27,31 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: $ac-light-brown;
+    .fossil-ads-wrapper {
+      .fossil-ads {
+        display: flex;
+        border-top: 1px solid $ac-brown;
+        &.titles {
+          background-color: $ac-yellow;
+        }
+        div {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          border-left: 1px solid $ac-brown;
+          padding: 16px;
+          height: 80px;
+          p {
+            margin: auto;
+          }
+        }
+        :first-child {
+          border: none;
+        }
+      }
+    }
     .owned-fossils {
       padding: 20px;
       border-top: 1px solid $ac-brown;
@@ -47,6 +72,13 @@
           width: 100%;
           .part-name {
             margin: auto;
+          }
+          .fossil-controls {
+            display: flex;
+            .buy-sell-buttons {
+              display: flex;
+              flex-direction: column;
+            }
           }
         }
       }

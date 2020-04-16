@@ -1,7 +1,4 @@
 <div *ngIf="fossilUser" class="fossil-controls">
-  <button class="btn btn-main" (click)="showSellFossils()">Post Selling Fossil Ad</button>
-  <button class="btn btn-main" (click)="showBuyFossils()">Post Buying Fossil Ad</button>
-  <button class="btn btn-main" (click)="showDeleteFossils()">Delete Fossil Ad</button>
   <button class="btn btn-main" (click)="updateOwnedFossils()">Update Fossils you own</button>
 </div>
 <div class="fossil-contents">
@@ -18,16 +15,24 @@
     >Fossil Ads</button>
   </div>
   <div class="fossil-tab-contents">
-    <div *ngIf="showAds;else ownedFossils" class="fossil-ads">
-      <div class="fossil-ads-titles">
-        <div>Name</div>
-        <div>Part Name</div>
-        <div>Price</div>
+    <div *ngIf="showAds;else ownedFossils" class="fossil-ads-wrapper">
+      <div class="fossil-ads titles">
+        <div><p>Name</p></div>
+        <div><p>Part Name</p></div>
+        <div><p>Price</p></div>
+        <div><p>Action</p></div>
       </div>
-      <div class="fossil-ads" *ngFor="let fossilAd of fossilAds">
-        <div>{{ fossilAd.name }}</div>
-        <div id="{{ fossilAd.partId }}">{{ fossilAd.partId | fossilIds }}</div>
-        <div>{{ fossilAd.price }}</div>
+      <div class="fossil-ads postings" *ngFor="let fossilAd of fossilAds">
+        <div id="{{ fossilAd.username }}"><p>{{ fossilAd.name }}</p></div>
+        <div id="{{ fossilAd.itemId }}"><p>{{ fossilAd.itemId | fossilIds }}</p></div>
+        <div><p>{{ fossilAd.price }}</p></div>
+        <div>
+          <button
+            class="btn btn-main btn-slim"
+            (click)="deleteFossilAd(fossilAd.itemId)"
+            *ngIf="fossilUser && fossilUser.username === fossilAd.username"
+          >Delete Your Ad</button>
+        </div>
       </div>
     </div>
     <ng-template #ownedFossils>
@@ -36,8 +41,16 @@
           <div class="fossil-name">{{ fossil.name }}</div>
           <div class="fossil-parts">
             <div *ngFor="let part of fossil.parts" class="fossil-part">
-              <div class="part-name"><label for="{{ part.id }}">{{ part.part }}</label></div>
-              <div *ngIf="fossilUser" class="owns-part"><input id="{{ part.id }}" type="checkbox" formControlName="{{ part.id }}"/></div>
+              <div class="part-name">
+                <label for="{{ part.id }}">{{ part.part }}</label>
+              </div>
+              <div *ngIf="fossilUser" class="fossil-controls">
+                <input id="{{ part.id }}" type="checkbox" formControlName="{{ part.id }}"/>
+                <div class="buy-sell-buttons">
+                  <button class="btn btn-main btn-slim" (click)="showMakeFossilAd(true, part.id)">Sell Part</button>
+                  <button class="btn btn-main btn-slim" (click)="showMakeFossilAd(false, part.id)">Buy Part</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -48,7 +61,12 @@
 
 <ac-modal *ngIf="showModal">
   <div class="fossil-request-submission">
-    <p>I said coming soon, chill the fuck out.</p>
-    <button class="btn btn-main btn-slim" (click)="toggleModal()">hoot hoot.</button>
+    <form [formGroup]="fossilAdForm" (ngSubmit)="createFossilAd()">
+      <label for="price">Price: </label>
+      <input id="price" formControlName="price" type="text" [pattern]="pattern"/>
+      <br>
+      <button type="submit" class="btn btn-main btn-slim" [disabled]="!fossilAdForm.valid">Submit Fossil Ad</button>
+      <button class="btn btn-main btn-slim" (click)="toggleModal()">Cancel</button>
+    </form>
   </div>
 </ac-modal>
