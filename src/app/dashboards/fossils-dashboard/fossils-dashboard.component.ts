@@ -157,7 +157,6 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
       const selling = true;
       const fossilSell = new PostFossilAd(
         this.loginService.getJwt(),
-        this.loginService.getPubKey(),
         selling,
         this.fossilAdPartId,
         price
@@ -170,7 +169,6 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
       const selling = false;
       const fossilBuy = new PostFossilAd(
         this.loginService.getJwt(),
-        this.loginService.getPubKey(),
         selling,
         this.fossilAdPartId,
         price
@@ -191,7 +189,6 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
   deleteFossilAd(itemId: string) {
     const fossilDelete = new RemoveFossil(
       this.loginService.getJwt(),
-      this.loginService.getPubKey(),
       itemId
     );
     this.fossilService.deleteFossilAd(fossilDelete).subscribe(
@@ -213,7 +210,7 @@ export class FossilsDashboardComponent implements OnInit, AfterViewChecked{
         }
       }
     }
-    const newFossils = new UpdateFossil(this.loginService.getJwt(), this.loginService.getPubKey(), ownedFossils as [string]);
+    const newFossils = new UpdateFossil(this.loginService.getJwt(), ownedFossils as [string]);
     this.fossilService.updateUserFossils(newFossils).subscribe(
       status => this.showToast(`Successfully updated owned fossils for ${status.name}`, true),
       error => this.showToast(error.error.status, false)

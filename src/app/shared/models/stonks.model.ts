@@ -9,7 +9,6 @@ export class Stonk {
 export class SellStonks {
   constructor(
     public token: string,
-    public key: string,
     public price: string
   ) {}
 }
@@ -17,7 +16,6 @@ export class SellStonks {
 export class BuyStonks {
   constructor(
     public token: string,
-    public key: string,
     public stonksBought: number,
     public stonksPrice: number
   ) {}

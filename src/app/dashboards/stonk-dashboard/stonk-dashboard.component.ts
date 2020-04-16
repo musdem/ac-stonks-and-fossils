@@ -74,14 +74,14 @@ export class StonkDashboardComponent implements OnInit {
   submitData() {
     if (this.priceSubmission) {
       const price = this.stonkSellForm.value.stonkPrice;
-      const stonk = new SellStonks(this.loginService.getJwt(), this.loginService.getPubKey(), price);
+      const stonk = new SellStonks(this.loginService.getJwt(), price);
       this.stonkService.sellStonks(stonk).subscribe(
         status => this.handleSellStonks(status, price),
         error => this.showToast(error.error.status, false)
       );
     } else {
       const {stonksBought, stonkPrice} = this.stonkBuyForm.value;
-      const stonks = new BuyStonks(this.loginService.getJwt(), this.loginService.getPubKey(), stonksBought, stonkPrice);
+      const stonks = new BuyStonks(this.loginService.getJwt(), stonksBought, stonkPrice);
       this.stonkService.buyStonks(stonks).subscribe(
         status => this.handleBuyStonks(status, stonksBought, stonkPrice),
         error => this.showToast(error.error.status, false)

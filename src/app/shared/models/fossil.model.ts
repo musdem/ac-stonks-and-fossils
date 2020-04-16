@@ -11,7 +11,6 @@ export class FossilAd {
 export class PostFossilAd {
   constructor(
     public token: string,
-    public key: string,
     public selling: boolean,
     public itemId: string,
     public price: number
@@ -28,7 +27,6 @@ export class PostSuccess {
 export class RemoveFossil {
   constructor(
     public token: string,
-    public key: string,
     public itemId: string
   ) {}
 }
@@ -36,7 +34,6 @@ export class RemoveFossil {
 export class UpdateFossil {
   constructor(
     public token: string,
-    public key: string,
     public itemIds: [string]
   ) {}
 }

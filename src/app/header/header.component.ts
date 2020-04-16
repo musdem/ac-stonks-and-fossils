@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     this.account = this.loginService.getUser();
     this.loggedIn = !!this.account;
     if (this.loggedIn) {
-      this.loginService.updateUser(new JwtToken(this.loginService.getJwt(), this.loginService.getPubKey())).subscribe(
+      this.loginService.updateUser(new JwtToken(this.loginService.getJwt())).subscribe(
         user => {
           this.loginService.setUser(user as User);
           this.account = user as User;
@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
   createAccount() {
     const user = this.createForm.value as Create;
     this.loginService.createAccount(user).subscribe(
-      status => this.showToast(`successfully created account for ${status.user}`, true),
+      status => this.handleCreateAccount(status),
       error => this.showToast(error.error.status, false)
     );
   }
@@ -91,6 +91,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleLogin(login: LoginResponse) {
+    this.toggleModal();
     this.showToast(`successfully logged in as ${login.name}`, true);
     this.account = new User(login.name, login.username, login.priceBought, login.turnipsBought, login.fossilsOwned);
     this.loginService.setPubKey();
@@ -100,8 +101,12 @@ export class HeaderComponent implements OnInit {
     this.loggedIn = true;
   }
 
-  showToast(message: string, success: boolean) {
+  handleCreateAccount(status) {
+    this.showToast(`successfully created account for ${status.user}`, true);
     this.toggleModal();
+  }
+
+  showToast(message: string, success: boolean) {
     this.toastService.getToasts().next(new Toast(message, 5, success));
   }
 
